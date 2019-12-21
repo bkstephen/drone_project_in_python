@@ -1,6 +1,6 @@
 import RPi.GPIO as GPIO
 import time
-
+import gyro
 # pins for wing management 19, 9, 20, 8
 # pins with 5v 26, 11, 25, 16
 
@@ -45,6 +45,7 @@ def main():
         while True:
 
             s = input("Give thrust: ")            
+            print(gyro.get_data())
             w1.ChangeDutyCycle(s)
             w2.ChangeDutyCycle(s)
             w3.ChangeDutyCycle(s)
