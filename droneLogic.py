@@ -46,10 +46,10 @@ def main():
 
             s = input("Give thrust: ")            
             print(gyro.get_data())
-            w1.ChangeDutyCycle(s)
-            w2.ChangeDutyCycle(s)
-            w3.ChangeDutyCycle(s)
-            w4.ChangeDutyCycle(s)
+            w1.ChangeDutyCycle(int(s))
+            w2.ChangeDutyCycle(int(s))
+            w3.ChangeDutyCycle(int(s))
+            w4.ChangeDutyCycle(int(s))
             time.sleep(0.5)
     except KeyboardInterrupt:
         w1.stop()
