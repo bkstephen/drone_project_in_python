@@ -50,7 +50,7 @@ def main():
             w2.ChangeDutyCycle(float(s))
             w3.ChangeDutyCycle(float(s))
             w4.ChangeDutyCycle(float(s))
-            time.sleep(0.5)
+            time.sleep(0.1)    
     except KeyboardInterrupt:
         w1.stop()
         w2.stop()
@@ -58,4 +58,9 @@ def main():
         w4.stop()
         GPIO.cleanup()
 
-main()  #run main()
+try:
+    main()  #run main()
+except:
+    print("Something went wrong")
+finally:
+    main()
