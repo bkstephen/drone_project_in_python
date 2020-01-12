@@ -15,8 +15,8 @@ def main():
     w2 = GPIO.PWM(thrust, 50)
     w1.start(0) # Initialization
     w2.start(0)
-    w1.ChangeDutyCycle(0)
-    w2.ChangeDutyCycle(0)
+    w1.ChangeDutyCycle(float(0))
+    w2.ChangeDutyCycle(float(0))
 
 
 #the motor has 5 speeds (5, 6, 7, 8, 9)
