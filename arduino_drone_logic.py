@@ -4,17 +4,18 @@ import time
 
 import serial
  
-s = serial.Serial('/dev/ttyUSB0', 9600) # change name, if needed
-s.open()
+port = serial.Serial('/dev/ttyUSB0', 9600) # change name, if needed
+port.close()
+port.open()
 time.sleep(5) # the Arduino is reset after enabling the serial connection, therefore we have to wait some seconds
  
-s.write("test")
+port.write("test")
 try:
     while True:
-        response = s.readline()
+        response = port.readline()
         print(response)
 except KeyboardInterrupt:
-    s.close()
+    port.close()
 
 
 def main():
