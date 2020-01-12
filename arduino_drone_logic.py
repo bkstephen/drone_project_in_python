@@ -31,3 +31,5 @@ except:
     print("Something went wrong")
 finally:
     main()
+
+#TODO create communicaiton between the arduino and pi using serial9600 by decoding the data received
