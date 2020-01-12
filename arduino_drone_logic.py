@@ -23,7 +23,7 @@ def main():
             s = "test"            
             print(gyro.get_data())
                         
-            s.write(str.encode(s))            
+            s.write(s.encode())            
             time.sleep(0.3)              
 
     except KeyboardInterrupt:
