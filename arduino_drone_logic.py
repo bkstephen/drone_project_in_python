@@ -8,8 +8,10 @@ s = serial.Serial('/dev/ttyAMA0', 9600) # change name, if needed
 s.close()
 s.open()
 time.sleep(5) # the Arduino is reset after enabling the serial connection, therefore we have to wait some seconds
- 
-s.write({!r}'.format("test"))
+
+test = "test"
+s.write(str.encode(test))
+
 try:
     while True:
         response = s.readline()
