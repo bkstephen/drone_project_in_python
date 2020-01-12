@@ -6,48 +6,27 @@ import serial
  
 def main():
     # set up
-    thrust = 16 #white -> 7
-    propeller = 20 #red -> 6
-
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(thrust, GPIO.OUT)
-    GPIO.setup(propeller, GPIO.OUT)
-
-    w1 = GPIO.PWM(propeller, 100) # GPIO 19 for PWM with 50Hz
-    w2 = GPIO.PWM(thrust, 100)
-    w1.start(0) # Initialization
-    w2.start(0)
-    w1.ChangeDutyCycle(float(0))
-    w2.ChangeDutyCycle(float(0))
-
-
-#the motor has 5 speeds (5, 6, 7, 8, 9)
-
+    #serial set up
     s = serial.Serial('/dev/ttyUSB0', 9600) # change name, if needed
     s.close()
     s.open()
-    time.sleep(5) # the Arduino is reset after enabling the serial connection, therefore we have to wait some seconds
+    time.sleep(5)
 
-    test = "test"
-    s.write(str.encode(test))
-
+    #the motor has 5 speeds (5, 6, 7, 8, 9)
     try:
         while True:
+            
             response = s.readline()
-            print(response)
-    except KeyboardInterrupt:
-        s.close()
-    try:
-        while True:
+            print(response) 
+
             s = input("Give thrust: ")            
             print(gyro.get_data())
-            w1.ChangeDutyCycle(float(0))
-            w2.ChangeDutyCycle(float(s))
-            time.sleep(0.3)    
-            w1.ChangeDutyCycle(float(6))            
+                        
+            s.write(str.encode(s))            
+            time.sleep(0.3)              
+
     except KeyboardInterrupt:
-        w1.stop()
-        w2.stop()
+        s.close()
         GPIO.cleanup()
 
 try:
