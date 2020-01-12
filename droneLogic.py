@@ -10,7 +10,8 @@ def main():
     wing2 = 9
     wing3 = 20
     wing4 = 8
-
+    frequency = 75
+    
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(wing1, GPIO.OUT)
     GPIO.setup(wing2, GPIO.OUT)
@@ -25,10 +26,10 @@ def main():
     GPIO.output(25, GPIO.HIGH)
     GPIO.output(16, GPIO.HIGH)
 
-    w1 = GPIO.PWM(wing1, 50) # GPIO 19 for PWM with 50Hz
-    w2 = GPIO.PWM(wing2, 50)
-    w3 = GPIO.PWM(wing3, 50)
-    w4 = GPIO.PWM(wing4, 50)
+    w1 = GPIO.PWM(wing1, frequency) # GPIO 19 for PWM with 50Hz
+    w2 = GPIO.PWM(wing2, frequency)
+    w3 = GPIO.PWM(wing3, frequency)
+    w4 = GPIO.PWM(wing4, frequency)
     w1.start(0) # Initialization
     w2.start(0)
     w3.start(0)
