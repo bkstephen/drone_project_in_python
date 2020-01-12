@@ -7,12 +7,15 @@ Servo select_propeller;
 Servo set_thurst;
 float thrust = 0;
 enum Proppellers {  
-  A = 0,
+  All = 0,
   X0 = 1 , 
   X1 = 2, 
   Y0 = 3, 
   Y1 = 4 };
 int propeller;
+
+int A = A0;
+int B = A1;
 
 void setup() {
   Serial.begin(9600);
@@ -48,12 +51,17 @@ void setup() {
   Serial.println("Pin attachments set");
 }
 
+
+
 void loop() {   
     Serial.print("Old thrust");
     Serial.println(thrust);
 
-    propeller = select_propeller.analogRead();
-    thrust = set_thurst.analogRead();
+    //propeller = select_propeller.read();
+    //thrust = set_thurst.read();
+
+    propeller = analogRead(A);
+    thrust = analogRead(B);
 
     if (propeller == 0)
     {

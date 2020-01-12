@@ -11,8 +11,8 @@ def main():
     GPIO.setup(thrust, GPIO.OUT)
     GPIO.setup(propeller, GPIO.OUT)
 
-    w1 = GPIO.PWM(propeller, 50) # GPIO 19 for PWM with 50Hz
-    w2 = GPIO.PWM(thrust, 50)
+    w1 = GPIO.PWM(propeller, 100) # GPIO 19 for PWM with 50Hz
+    w2 = GPIO.PWM(thrust, 100)
     w1.start(0) # Initialization
     w2.start(0)
     w1.ChangeDutyCycle(float(0))
