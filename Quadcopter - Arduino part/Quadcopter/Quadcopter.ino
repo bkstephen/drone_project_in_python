@@ -5,7 +5,9 @@ Servo quad3;
 Servo quad4;
 Servo select_propeller;
 Servo set_thurst;
+
 float thrust = 0;
+
 enum Proppellers {  
   All = 0,
   X0 = 1 , 
@@ -14,11 +16,9 @@ enum Proppellers {
   Y1 = 4 };
 int propeller;
 
-int A = A0;
-int B = A1;
-
 void setup() {
   Serial.begin(9600);
+
   pinMode(0, OUTPUT);
   pinMode(1, OUTPUT);
   pinMode(2, OUTPUT);
@@ -33,7 +33,9 @@ void setup() {
   pinMode(11, OUTPUT);
   pinMode(12, OUTPUT);
   pinMode(13, OUTPUT);
+
   Serial.println("Pin modes set");
+
   digitalWrite(1, HIGH);
   digitalWrite(4, HIGH);
   digitalWrite(9, HIGH);
@@ -46,8 +48,10 @@ void setup() {
   quad2.attach(5);
   quad3.attach(10);
   quad4.attach(13);
-  select_propeller.attach(6);
-  set_thurst.attach(7);
+
+  //select_propeller.attach(6);
+  //set_thurst.attach(7);
+
   Serial.println("Pin attachments set");
 }
 
@@ -59,13 +63,10 @@ void loop() {
         byte nr = Serial.read();
         Serial.print("The following char was received: ");
         Serial.println(nr, DEC);
+        thrust = nr;   
     }
 
-    propeller = select_propeller.read();
-    thrust = set_thurst.read();
-
-    //propeller = analogRead(A);
-    //thrust = analogRead(B);
+    //propeller = select_propeller.read();     
 
     if (propeller == 0)
     {
