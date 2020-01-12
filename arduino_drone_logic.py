@@ -14,13 +14,11 @@ def main():
 
     #the motor has 5 speeds (5, 6, 7, 8, 9)
     try:
-        
-        s = input("Give thrust: ")
-        #print(gyro.get_data())
-                        
-        port.write(str.encode(s))            
-                         
         while True:
+            s = input("Give thrust: ")
+            #print(gyro.get_data())                            
+            port.write(str.encode(s))     
+                               
             
             response = port.readline()
             print(response) 
