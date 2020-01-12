@@ -5,7 +5,7 @@ import gyro
 def main():
     # set up
     thrust = 16 #white -> 7
-    propeller = 2 #red -> 6
+    propeller = 20 #red -> 6
 
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(thrust, GPIO.OUT)
