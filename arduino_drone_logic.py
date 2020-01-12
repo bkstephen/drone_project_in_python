@@ -16,8 +16,9 @@ def main():
     try:
         while True:
             s = input("Give thrust: ")
-            #print(gyro.get_data())                            
-            port.write(str.encode(s))     
+            #print(gyro.get_data())             
+            st  = "test"               
+            port.write(str.encode(st))     
                                
             
             response = port.readline()
