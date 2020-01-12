@@ -19,7 +19,7 @@ def main():
             response = port.readline()
             print(response) 
 
-            s = str(input("Give thrust: "))                     
+            s = input("Give thrust: ")                     
             print(gyro.get_data())
                         
             port.write(str.encode(s))            

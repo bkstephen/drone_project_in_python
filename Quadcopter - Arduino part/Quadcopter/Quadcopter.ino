@@ -60,11 +60,11 @@ void setup() {
 void loop() {   
 
   if (Serial.available()) {
-        byte nr = Serial.read();
-        Serial.print("The following char was received: ");
-        Serial.println(nr, DEC);
-        thrust = nr;   
-    }
+    byte nr = Serial.read();
+    //Serial.print("The following char was received: ");
+    //Serial.println(nr, DEC);
+
+    thrust = (nr, DEC);       
 
     //propeller = select_propeller.read();     
 
@@ -92,9 +92,10 @@ void loop() {
       quad4.write(thrust);
     } 
     Serial.print("New thurst set:");
-    Serial.println(thrust);
+    Serial.println(nr);
     Serial.println(propeller);
     thrust = 0;
     propeller = 6;    
     delay(1000);
+  }
 }
