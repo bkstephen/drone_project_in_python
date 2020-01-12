@@ -6,7 +6,7 @@ s.close()
 s.open()
 time.sleep(5) # the Arduino is reset after enabling the serial connectio, therefore we have to wait some seconds
  
-s.write("test")
+s.write(str.encode("test"))
 try:
     while True:
         response = s.readline()
