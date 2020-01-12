@@ -4,21 +4,6 @@ import gyro
 
 import serial
  
-s = serial.Serial('/dev/ttyAMA0', 9600) # change name, if needed
-s.close()
-s.open()
-time.sleep(5) # the Arduino is reset after enabling the serial connection, therefore we have to wait some seconds
-
-test = "test"
-s.write(str.encode(test))
-
-try:
-    while True:
-        response = s.readline()
-        print(response)
-except KeyboardInterrupt:
-    s.close()
-
 def main():
     # set up
     thrust = 16 #white -> 7
@@ -38,6 +23,20 @@ def main():
 
 #the motor has 5 speeds (5, 6, 7, 8, 9)
 
+    s = serial.Serial('/dev/ttyUSB0', 9600) # change name, if needed
+    s.close()
+    s.open()
+    time.sleep(5) # the Arduino is reset after enabling the serial connection, therefore we have to wait some seconds
+
+    test = "test"
+    s.write(str.encode(test))
+
+    try:
+        while True:
+            response = s.readline()
+            print(response)
+    except KeyboardInterrupt:
+        s.close()
     try:
         while True:
             s = input("Give thrust: ")            
