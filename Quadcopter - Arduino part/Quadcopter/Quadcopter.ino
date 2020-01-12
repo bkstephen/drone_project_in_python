@@ -54,14 +54,18 @@ void setup() {
 
 
 void loop() {   
-    Serial.print("Old thrust");
-    Serial.println(thrust);
 
-    //propeller = select_propeller.read();
-    //thrust = set_thurst.read();
+  if (Serial.available()) {
+        byte nr = Serial.read();
+        Serial.print("The following char was received: ");
+        Serial.println(nr, DEC);
+    }
 
-    propeller = analogRead(A);
-    thrust = analogRead(B);
+    propeller = select_propeller.read();
+    thrust = set_thurst.read();
+
+    //propeller = analogRead(A);
+    //thrust = analogRead(B);
 
     if (propeller == 0)
     {
@@ -88,6 +92,8 @@ void loop() {
     } 
     Serial.print("New thurst set:");
     Serial.println(thrust);
+    Serial.println(propeller);
     thrust = 0;
     propeller = 6;    
+    delay(1000);
 }
