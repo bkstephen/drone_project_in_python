@@ -7,7 +7,7 @@ import serial
 def main():
     # set up
     #serial set up
-    port = serial.Serial('/dev/ttyUSB2', 9600) # change name, if needed
+    port = serial.Serial('/dev/ttyUSB1', 9600) # change name, if needed
     port.close()
     port.open()
     time.sleep(5)
@@ -16,14 +16,10 @@ def main():
     try:
         while True:
             s = input("Give thrust: ")
-            #print(gyro.get_data())             
-            st  = "test"               
-            port.write(str.encode(st))     
-                               
-            
+            #print(gyro.get_data())                
+            port.write(str.encode(s))                         
             response = port.readline()
             print(response) 
-
 
     except KeyboardInterrupt:
         port.close()
