@@ -52,8 +52,8 @@ void loop() {
     Serial.print("Old thrust");
     Serial.println(thrust);
 
-    propeller = select_propeller.read();
-    thrust = set_thurst.read();
+    propeller = select_propeller.analogRead();
+    thrust = set_thurst.analogRead();
 
     if (propeller == 0)
     {
