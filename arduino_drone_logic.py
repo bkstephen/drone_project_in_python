@@ -16,7 +16,7 @@ def main():
     try:
         while True:
             
-            response = s.readline()
+            response = port.readline()
             print(response) 
 
             s = str(input("Give thrust: "))                     
