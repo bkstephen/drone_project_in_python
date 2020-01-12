@@ -1,6 +1,6 @@
 import RPi.GPIO as GPIO
 import time
-import gyro
+#import gyro
 
 import serial
  
