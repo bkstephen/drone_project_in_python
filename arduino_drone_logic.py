@@ -7,9 +7,9 @@ import serial
 def main():
     # set up
     #serial set up
-    s = serial.Serial('/dev/ttyUSB0', 9600) # change name, if needed
-    s.close()
-    s.open()
+    port = serial.Serial('/dev/ttyUSB0', 9600) # change name, if needed
+    port.close()
+    port.open()
     time.sleep(5)
 
     #the motor has 5 speeds (5, 6, 7, 8, 9)
@@ -19,15 +19,14 @@ def main():
             response = s.readline()
             print(response) 
 
-            s = str(input("Give thrust: "))
-            s = "test"            
+            s = str(input("Give thrust: "))                     
             print(gyro.get_data())
                         
-            s.write(s.encode())            
+            port.write(s.encode())            
             time.sleep(0.3)              
 
     except KeyboardInterrupt:
-        s.close()
+        port.close()
         GPIO.cleanup()
 
 try:
