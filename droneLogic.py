@@ -10,8 +10,8 @@ def main():
     wing2 = 9
     wing3 = 20
     wing4 = 8
-    frequency = 75
-    
+    frequency = 25
+
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(wing1, GPIO.OUT)
     GPIO.setup(wing2, GPIO.OUT)
