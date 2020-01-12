@@ -20,7 +20,7 @@ def main():
             print(response) 
 
             s = str(input("Give thrust: "))
-            print(gyro.get_data())
+            #print(gyro.get_data())
                         
             port.write(s)            
             time.sleep(0.3)              
