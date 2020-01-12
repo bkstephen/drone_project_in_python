@@ -63,39 +63,45 @@ void loop() {
     byte nr = Serial.read();
     Serial.print("The following char was received: ");
     Serial.println(nr, DEC);
-
-    thrust = (nr, DEC);       
-
-    //propeller = select_propeller.read();     
-
-    if (propeller == 0)
-    {
-      quad1.write(thrust);
-      quad2.write(thrust);
-      quad3.write(thrust);
-      quad4.write(thrust);
-    }
-    else if (propeller == 1)
-    {
-      quad1.write(thrust);
-    }
-    else if (propeller == 2)
-    {
-      quad2.write(thrust);
-    }
-    else if (propeller == 3)
-    {
-      quad3.write(thrust);
-    }
-    else if (propeller == 4)
-    {
-      quad4.write(thrust);
-    } 
-    //Serial.print("New thurst set:");
-    //Serial.println(thrust);
-    //Serial.println(propeller);
-    thrust = 0;
-    propeller = 6;    
-    delay(1000);
   }
+
+  // if (Serial.available()) {
+  //   byte nr = Serial.read();
+  //   Serial.print("The following char was received: ");
+  //   Serial.println(nr, DEC);
+
+  //   thrust = (nr, DEC);       
+
+  //   //propeller = select_propeller.read();     
+
+  //   if (propeller == 0)
+  //   {
+  //     quad1.write(thrust);
+  //     quad2.write(thrust);
+  //     quad3.write(thrust);
+  //     quad4.write(thrust);
+  //   }
+  //   else if (propeller == 1)
+  //   {
+  //     quad1.write(thrust);
+  //   }
+  //   else if (propeller == 2)
+  //   {
+  //     quad2.write(thrust);
+  //   }
+  //   else if (propeller == 3)
+  //   {
+  //     quad3.write(thrust);
+  //   }
+  //   else if (propeller == 4)
+  //   {
+  //     quad4.write(thrust);
+  //   } 
+  //   //Serial.print("New thurst set:");
+  //   //Serial.println(thrust);
+  //   //Serial.println(propeller);
+  //   thrust = 0;
+  //   propeller = 6;    
+  //   delay(1000);
+  // }
 }
