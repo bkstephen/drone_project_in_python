@@ -4,7 +4,7 @@ import time
 
 import serial
  
-s = serial.Serial('/dev/ttyAMA0', 9600) # change name, if needed
+s = serial.Serial('/dev/ttyUSB0', 9600) # change name, if needed
 s.open()
 time.sleep(5) # the Arduino is reset after enabling the serial connection, therefore we have to wait some seconds
  
