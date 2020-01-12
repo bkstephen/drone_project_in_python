@@ -92,7 +92,7 @@ void loop() {
       quad4.write(thrust);
     } 
     Serial.print("New thurst set:");
-    Serial.println(nr);
+    Serial.println(nr, DEC);
     Serial.println(propeller);
     thrust = 0;
     propeller = 6;    

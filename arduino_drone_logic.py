@@ -22,7 +22,7 @@ def main():
             s = input("Give thrust: ")                     
             print(gyro.get_data())
                         
-            port.write(str.encode(s))            
+            port.write(s)            
             time.sleep(0.3)              
 
     except KeyboardInterrupt:
