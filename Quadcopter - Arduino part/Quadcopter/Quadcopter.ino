@@ -3,18 +3,8 @@ Servo quad1;
 Servo quad2;
 Servo quad3;
 Servo quad4;
-Servo select_propeller;
-Servo set_thurst;
 
 float thrust = 0;
-
-enum Proppellers {  
-  All = 0,
-  X0 = 1 , 
-  X1 = 2, 
-  Y0 = 3, 
-  Y1 = 4 };
-int propeller;
 
 void setup() {
   Serial.begin(9600);
@@ -54,49 +44,66 @@ void setup() {
 
   Serial.println("Pin attachments set");
 }
-
-
-
+ 
 void loop() {   
 
   if (Serial.available()) {
-    byte nr = Serial.read();
-    Serial.print("The following char was received: ");
-    char temp = nr;
-    Serial.println(temp);
 
-    thrust = (nr, DEC);       
-
-    //propeller = select_propeller.read();     
-
-    if (propeller == 0)
-    {
+    //reads character of sequence
+    byte readLine = Serial.read();   
+    char data = readLine;
+    //Serial.println(data);
+    //propeller = select_propeller.read();
+    if (data == 'A')
+    {        
+      thrust = ConCatStringToFloat();
       quad1.write(thrust);
       quad2.write(thrust);
       quad3.write(thrust);
       quad4.write(thrust);
     }
-    else if (propeller == 1)
+    else if (data == 'X')
     {
+      thrust = ConCatStringToFloat();
       quad1.write(thrust);
     }
-    else if (propeller == 2)
+    else if (data == 'x')
     {
+      thrust = ConCatStringToFloat();
       quad2.write(thrust);
     }
-    else if (propeller == 3)
+    else if (data == 'Y')
     {
+      thrust = ConCatStringToFloat();
       quad3.write(thrust);
     }
-    else if (propeller == 4)
+    else if (data == 'y')
     {
+      thrust = ConCatStringToFloat();
       quad4.write(thrust);
     } 
-    //Serial.print("New thurst set:");
+    //delay(1000);
     //Serial.println(thrust);
-    //Serial.println(propeller);
-    thrust = 0;
-    propeller = 6;    
-    delay(1000);
+    data = 'N/A';
   }
+  thrust = 0;    
+}
+
+float ConCatStringToFloat()
+{
+  char temp[] = "";  
+  char c;  
+  byte readLine = Serial.read(); 
+  c = readLine;
+
+  while (c != 'e'){               
+    strncat(temp, &c, 1);
+    readLine = Serial.read(); 
+    c = readLine;        
+    Serial.println(c);
+  }
+
+  Serial.println(temp);
+  float result = atof(temp);  
+  return result;
 }
