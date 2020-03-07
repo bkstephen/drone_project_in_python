@@ -7,7 +7,7 @@ import serial
 def main():
     # set up
     #serial set up
-    port = serial.Serial('/dev/ttyUSB1', 9600) # change name, if needed
+    port = serial.Serial('/dev/ttyUSB0', 9600) # change name, if needed
     port.close()
     port.open()
     time.sleep(5)
