@@ -4,7 +4,7 @@ Servo quad2;
 Servo quad3;
 Servo quad4;
 
-float thrust = 0;
+float thrust;
 
 void setup() {
   Serial.begin(9600);
@@ -24,7 +24,7 @@ void setup() {
   pinMode(12, OUTPUT);
   pinMode(13, OUTPUT);
 
-  Serial.println("Pin modes set");
+  //Serial.println("Pin modes set");
 
   digitalWrite(1, HIGH);
   digitalWrite(4, HIGH);
@@ -42,7 +42,7 @@ void setup() {
   //select_propeller.attach(6);
   //set_thurst.attach(7);
 
-  Serial.println("Pin attachments set");
+  //Serial.println("Pin attachments set");
 }
  
 void loop() {   
@@ -51,59 +51,101 @@ void loop() {
 
     //reads character of sequence
     byte readLine = Serial.read();   
-    char data = readLine;
-    //Serial.println(data);
+    char *data = (char*)&readLine;
+    Serial.println(*data);    
+    
     //propeller = select_propeller.read();
-    if (data == 'A')
-    {        
-      thrust = ConCatStringToFloat();
+    if (*data == 'A')
+    {            
+      thrust = ReadFloat();                             
       quad1.write(thrust);
       quad2.write(thrust);
       quad3.write(thrust);
       quad4.write(thrust);
+      
+      Serial.println(thrust);
     }
-    else if (data == 'X')
+    else if (*data == 'X')
     {
-      thrust = ConCatStringToFloat();
+      thrust = ReadFloat(); 
       quad1.write(thrust);
     }
-    else if (data == 'x')
+    else if (*data == 'x')
     {
-      thrust = ConCatStringToFloat();
+      thrust = ReadFloat();  
       quad2.write(thrust);
     }
-    else if (data == 'Y')
+    else if (*data == 'Y')
     {
-      thrust = ConCatStringToFloat();
+      thrust = ReadFloat(); 
       quad3.write(thrust);
     }
-    else if (data == 'y')
+    else if (*data == 'y')
     {
-      thrust = ConCatStringToFloat();
+      thrust = ReadFloat();  
       quad4.write(thrust);
-    } 
-    //delay(1000);
-    //Serial.println(thrust);
-    data = 'N/A';
+    }     
   }
-  thrust = 0;    
+  // Serial.println(thrust);
+  // thrust = 0;      
 }
 
-float ConCatStringToFloat()
-{
-  char temp[] = "";  
-  char c;  
-  byte readLine = Serial.read(); 
-  c = readLine;
-
-  while (c != 'e'){               
-    strncat(temp, &c, 1);
-    readLine = Serial.read(); 
-    c = readLine;        
-    Serial.println(c);
-  }
-
-  Serial.println(temp);
-  float result = atof(temp);  
-  return result;
+float ReadFloat()
+{  
+  delay(150);
+  byte readLine = Serial.read();   
+  char *data = (char*)&readLine;
+  float temp = atof(data);
+  for (int i = 0; i <= 1; i++)
+  {
+    delay(150);
+    readLine = Serial.read();   
+    data = (char*)&readLine;
+    if (*data == '1')
+    {
+      temp = temp + 0.1;
+      return temp;
+    }
+    else if (*data == '2')
+    {
+      temp = temp + 0.2;
+      return temp;
+    }
+    else if (*data == '3')
+    {
+      temp = temp + 0.3;
+      return temp;
+    }
+    else if (*data == '4')
+    {
+      temp = temp + 0.4;
+      return temp;
+    }
+    else if (*data == '5')
+    {
+      temp = temp + 0.5;
+      return temp;
+    }
+    else if (*data == '6')
+    {
+      temp = temp + 0.6;
+      return temp;
+    }
+    else if (*data == '7')
+    {
+      temp = temp + 0.7;
+      return temp;
+    }
+    else if (*data == '8')
+    {
+      temp = temp + 0.8;
+      return temp;
+    }
+    else if (*data == '9')
+    {
+      temp = temp + 0.9;
+      return temp;
+    }
+  }  
+  return temp;
 }

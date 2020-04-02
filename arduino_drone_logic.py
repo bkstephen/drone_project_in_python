@@ -1,12 +1,11 @@
-import RPi.GPIO as GPIO
 import time
-import gyro
+#import gyro
 
 import serial
  
 def main():    
     #serial set up
-    port = serial.Serial('/dev/ttyUSB1', 9600) # change name, if needed
+    port = serial.Serial('/dev/ttyUSB0', 9600) # change name, if needed
     port.close()
     port.open()
     time.sleep(5)
@@ -15,17 +14,15 @@ def main():
     try:
         while True:
             s = input("Give thrust: ")
-            p = input("Propeller (A/x/X/y/Y)")
-            print(gyro.get_data()) 
+            p = input("Propeller (A/x/X/y/Y)")            
              
             # Send the code to be decoded p if the propeller, s is the speed, e determines the end of the data              
-            port.write(str.encode(p + s + "e"))                         
-            response = port.readline()
-            print(response) 
+            port.write(str.encode(p))        
+            port.write(str.encode(s))                  
+            # port.write(str.encode("e"))             
 
     except KeyboardInterrupt:
-        port.close()
-        GPIO.cleanup()
+        port.close()        
 
 try:
     main()  #run main()
