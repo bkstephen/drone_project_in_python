@@ -3,18 +3,8 @@ Servo quad1;
 Servo quad2;
 Servo quad3;
 Servo quad4;
-Servo select_propeller;
-Servo set_thurst;
 
-float thrust = 0;
-
-enum Proppellers {  
-  All = 0,
-  X0 = 1 , 
-  X1 = 2, 
-  Y0 = 3, 
-  Y1 = 4 };
-int propeller;
+float thrust;
 
 void setup() {
   Serial.begin(9600);
@@ -34,7 +24,7 @@ void setup() {
   pinMode(12, OUTPUT);
   pinMode(13, OUTPUT);
 
-  Serial.println("Pin modes set");
+  //Serial.println("Pin modes set");
 
   digitalWrite(1, HIGH);
   digitalWrite(4, HIGH);
@@ -52,51 +42,110 @@ void setup() {
   //select_propeller.attach(6);
   //set_thurst.attach(7);
 
-  Serial.println("Pin attachments set");
+  //Serial.println("Pin attachments set");
 }
-
-
-
+ 
 void loop() {   
 
   if (Serial.available()) {
-    byte nr = Serial.read();
-    Serial.print("The following char was received: ");
-    char temp = nr;
-    Serial.println(temp);
 
-    thrust = (nr, DEC);       
-
-    //propeller = select_propeller.read();     
-
-    if (propeller == 0)
-    {
+    //reads character of sequence
+    byte readLine = Serial.read();   
+    char *data = (char*)&readLine;
+    Serial.println(*data);    
+    
+    //propeller = select_propeller.read();
+    if (*data == 'A')
+    {            
+      thrust = ReadFloat();                             
       quad1.write(thrust);
       quad2.write(thrust);
       quad3.write(thrust);
       quad4.write(thrust);
+      
+      Serial.println(thrust);
     }
-    else if (propeller == 1)
+    else if (*data == 'X')
     {
+      thrust = ReadFloat(); 
       quad1.write(thrust);
     }
-    else if (propeller == 2)
+    else if (*data == 'x')
     {
+      thrust = ReadFloat();  
       quad2.write(thrust);
     }
-    else if (propeller == 3)
+    else if (*data == 'Y')
     {
+      thrust = ReadFloat(); 
       quad3.write(thrust);
     }
-    else if (propeller == 4)
+    else if (*data == 'y')
     {
+      thrust = ReadFloat();  
       quad4.write(thrust);
-    } 
-    //Serial.print("New thurst set:");
-    //Serial.println(thrust);
-    //Serial.println(propeller);
-    thrust = 0;
-    propeller = 6;    
-    delay(1000);
+    }     
   }
+  // Serial.println(thrust);
+  // thrust = 0;      
+}
+
+float ReadFloat()
+{  
+  delay(150);
+  byte readLine = Serial.read();   
+  char *data = (char*)&readLine;
+  float temp = atof(data);
+  for (int i = 0; i <= 1; i++)
+  {
+    delay(150);
+    readLine = Serial.read();   
+    data = (char*)&readLine;
+    if (*data == '1')
+    {
+      temp = temp + 0.1;
+      return temp;
+    }
+    else if (*data == '2')
+    {
+      temp = temp + 0.2;
+      return temp;
+    }
+    else if (*data == '3')
+    {
+      temp = temp + 0.3;
+      return temp;
+    }
+    else if (*data == '4')
+    {
+      temp = temp + 0.4;
+      return temp;
+    }
+    else if (*data == '5')
+    {
+      temp = temp + 0.5;
+      return temp;
+    }
+    else if (*data == '6')
+    {
+      temp = temp + 0.6;
+      return temp;
+    }
+    else if (*data == '7')
+    {
+      temp = temp + 0.7;
+      return temp;
+    }
+    else if (*data == '8')
+    {
+      temp = temp + 0.8;
+      return temp;
+    }
+    else if (*data == '9')
+    {
+      temp = temp + 0.9;
+      return temp;
+    }
+  }  
+  return temp;
 }

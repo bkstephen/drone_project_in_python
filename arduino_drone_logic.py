@@ -1,29 +1,16 @@
-import RPi.GPIO as GPIO
 import time
 #import gyro
 
 import serial
- 
-def main():
-    # set up
-    #serial set up
-    port = serial.Serial('/dev/ttyUSB0', 9600) # change name, if needed
-    port.close()
-    port.open()
-    time.sleep(5)
+import serial_communication
 
-    #the motor has 5 speeds (5, 6, 7, 8, 9)
-    try:
-        while True:
-            s = input("Give thrust: ")
-            #print(gyro.get_data())                
-            port.write(str.encode(s))                         
-            response = port.readline()
-            print(response) 
+def main():    
 
-    except KeyboardInterrupt:
-        port.close()
-        GPIO.cleanup()
+
+    while True:
+        s = input("Give thrust: ")
+        p = input("Propeller (A/x/X/y/Y)")     
+        serial_communication.write(s, p)       
 
 try:
     main()  #run main()
@@ -31,3 +18,6 @@ except:
     print("Something went wrong")
 finally:
     main()
+
+
+
