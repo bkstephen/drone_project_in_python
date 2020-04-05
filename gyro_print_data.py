@@ -23,7 +23,6 @@ OFF_X = 0x2F
 OFF_Y = 0x30
 oFF_Z = 0x31
 
-
 def MPU_Init():
         #write to sample rate register
 
@@ -68,6 +67,13 @@ MPU_Init()
 
 print (" Reading Data of Gyroscope and Accelerometer")
 
+# Variables that at the begining of readings take average offsets
+# To work properly the sernsor must lie as flat as possible
+adjustment_counter = 10
+x_adjustment = 0
+y_adjustment = 0
+z_adjustment = 0
+
 while True:
 
         #Read Accelerometer raw value
@@ -85,9 +91,22 @@ while True:
         Ay = acc_y/16384.0
         Az = acc_z/16384.0
 
-        Gx = gyro_x/131.0 
-        Gy = gyro_y/131.0 
-        Gz = gyro_z/131.0 
+        Gx = gyro_x/131.0 - x_adjustment
+        Gy = gyro_y/131.0 - y_adjustment
+        Gz = gyro_z/131.0 - z_adjustment
+
+        if(adjustment_counter <= 10 and adjustment_counter > 0):
+            x_adjustment = gyro_x/131.0 + x_adjustment
+            y_adjustment = gyro_y/131.0 + y_adjustment
+            z_adjustment = gyro_z/131.0 + z_adjustment
+            adjustment_counter-=1
+        elif(adjustment_counter==0):
+            x_adjustment = x_adjustment/10
+            y_adjustment = y_adjustment/10
+            z_adjustment = z_adjustment/10
+            adjustment_counter-=1
+
+
 
 
         #print ("Gx=%.2f" %Gx, u'\u00b0'+ "/s", "\tGy=%.2f" %Gy, u'\u00b0'+ "/s", "\tGz=%.2f" %Gz, u'\u00b0'+ "/s", "\tAx=%.2f g" %Ax, "\tAy=%.2f g" %Ay, "\tAz=%.2f g" %Az)
